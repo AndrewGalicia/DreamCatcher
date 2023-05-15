@@ -36,7 +36,7 @@ router.get('/checkProfile', async function(req, res) {
   try {
     const user = await User.findById(req.user._id).populate('profile');
     if (user.profile) {
-      res.redirect('/profiles');
+      res.redirect(`/profiles/${user.profile._id}`);;
     } else {
       res.redirect('/profiles/new');
     }
