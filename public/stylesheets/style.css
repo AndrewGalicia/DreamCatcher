@@ -73,3 +73,11 @@ nav > a.active {
   height: 30px;
 }
 
+input {
+  background-color: violet;
+}
+
+button {
+  background-color: violet;
+}
+
