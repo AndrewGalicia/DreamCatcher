@@ -47,6 +47,8 @@ const sleepSchema = new mongoose.Schema({
       minutes: durationInMinutes % 60
     };
     next();
+  },{
+    timestamps: true
   });
 
 // Compile the schema into a model and export it
