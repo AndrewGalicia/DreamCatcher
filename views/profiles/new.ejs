@@ -2,5 +2,27 @@
 
 <h2>New Profile Page Working</h2>
 
+<body>
+	<h1>Create Profile</h1>
+	<form action="/profiles" method="POST">
+		<label for="firstName">First Name:</label>
+		<input type="text" id="firstName" name="firstName" required>
+
+		<label for="lastName">Last Name:</label>
+		<input type="text" id="lastName" name="lastName" required>
+
+		<label for="sleepGoalHours">Sleep Goal Hours:</label>
+		<input type="number" id="sleepGoalHours" name="sleepGoal[hours]" min="0" required>
+
+		<label for="sleepGoalMinutes">Sleep Goal Minutes:</label>
+		<input type="number" id="sleepGoalMinutes" name="sleepGoal[minutes]" min="0" max="59" required>
+
+		<button type="submit">Create Profile</button>
+	</form>
+	<% if (errorMsg) { %>
+		<p><%= errorMsg %></p>
+	<% } %>
+</body>
+
 
 <%- include('../partials/footer') %>

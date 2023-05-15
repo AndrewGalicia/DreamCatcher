@@ -1,23 +1,38 @@
 const Profile = require('../models/profile');
-// const Dreams = require('../models/dream');
+const User = require('../models/user');
+
+async function show(req, res) {
+  try {
+    const user = await User.findById(req.user._id).populate('profile');
+    res.render('profiles/show', { title: 'Profile Page', profile: user.profile });
+  } catch (err) {
+    console.error(err);
+    res.render('error', { error: err });
+  }
+}
+
+function newProfile(req, res) {
+  res.render('profiles/new', { title: 'New Profile', errorMsg: '', profile: null });
+}
+
+async function createProfile(req, res) {
+  try {
+    const { firstName, lastName, sleepGoalHours, sleepGoalMinutes } = req.body;
+    const sleepGoal = { hours: sleepGoalHours, minutes: sleepGoalMinutes };
+    const profile = new Profile({ firstName, lastName, sleepGoal });
+    const savedProfile = await profile.save();
+    const user = await User.findById(req.user._id);
+    user.profile = savedProfile._id;
+    await user.save();
+    res.redirect('/profile');
+  } catch (err) {
+    console.error(err);
+    res.render('profiles/new', { title: 'New Profile', errorMsg: err.message, profile: req.body });
+  }
+}
 
 module.exports = {
-   
-    show,
-    new: newProfile
-    
-  };
-
-
-  async function show(req, res) {
-    // Populate the cast array with performer docs instead of ObjectIds
-    const profiles = await Profile.findById(req.params.id);
-  
-    res.render('profile/show', { title: 'Profile Page', profiles });
-  }
-
-  function newProfile(req, res) {
-    // We'll want to be able to render an  
-    // errorMsg if the create action fails
-    res.render('profile/new', { title: 'New Profile', errorMsg: '' });
-  }
+  show,
+  newProfile,
+  createProfile
+};
