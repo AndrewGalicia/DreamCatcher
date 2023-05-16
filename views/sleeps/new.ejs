@@ -2,12 +2,10 @@
 
 <h2>New Sleep Log Working</h2>
 
-<form action="/:id/sleeps" method="POST">
-    <!-- dreamed checkbox -->
-    <label for="dreamed">Did you dream?</label>
-    <input type="checkbox" name="dreamed" id="dreamed">
-  
-    <!-- sleep quality radio buttons -->
+<form action="/profiles/<%= user._id %>/sleeps" method="POST">
+    <h2>New Sleep Log for <%= profile.name %></h2>
+ 
+  </form>
     <div>
       <span>Sleep quality:</span>
       <label for="poor">Poor</label>
