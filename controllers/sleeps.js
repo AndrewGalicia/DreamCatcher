@@ -13,28 +13,34 @@ module.exports = {
     res.render('sleeps/index', {title: 'DreamCatcher User Page', sleeps });
   }
 
-  function newSleep(req, res) {
-    const profile = Profile.findById(req.params.id);
-      // We'll want to be able to render an  
-      // errorMsg if the create action fails
-      res.render('sleeps/new', {title: 'New Sleep Log Form', errorMsg: '', profile: profile });
-    }
-
-  async function create(req, res) {
-    const sleep = new Sleep({
-      dreamed: req.body.dreamed === 'on',
-      sleepQuality: req.body.sleepQuality,
-      sleepStart: new Date(req.body.sleepStart),
-      sleepEnd: new Date(req.body.sleepEnd)
-    });
-  
-    try {
-      await sleep.save();
-      res.redirect(`/sleeps/${sleep._id}`);
-    } catch (err) {
-      res.render('sleeps/new', {title: 'New Sleep Log Form', errorMsg: 'Error creating sleep log' });
-    }
+  async function newSleep(req, res) {
+    const profile = await Profile.findById(req.params.id).exec();
+    res.render('sleeps/new', { title: 'New Sleep Log Form', errorMsg: '', profile: profile });
   }
+
+    async function create(req, res) {
+      const sleep = new Sleep({
+        dreamed: req.body.dreamed === 'on',
+        sleepQuality: req.body.sleepQuality,
+        sleepStart: new Date(req.body.sleepStart),
+        sleepEnd: new Date(req.body.sleepEnd)
+      });
+    
+      try {
+        const savedSleep = await sleep.save();
+        const profile = await Profile.findById(req.params.id);
+        
+        if (!profile) {
+          res.redirect(`/profiles/${req.params.id}`);
+        } else {
+          profile.sleepLogs.push(savedSleep);
+          await profile.save();
+          res.redirect(`/profiles/${req.params.id}`);
+        }
+      } catch (err) {
+        res.render('sleeps/new', { title: 'New Sleep Log Form', errorMsg: 'Error creating sleep log', profile });
+      }
+    }
 
   async function show(req, res) {
     try {
