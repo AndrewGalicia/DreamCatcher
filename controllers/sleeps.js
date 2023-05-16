@@ -14,10 +14,11 @@ module.exports = {
   }
 
   function newSleep(req, res) {
-    // We'll want to be able to render an  
-    // errorMsg if the create action fails
-    res.render('sleeps/new', {title: 'New Sleep Log Form', errorMsg: '' });
-  }
+    const profile = Profile.findById(req.params.id);
+      // We'll want to be able to render an  
+      // errorMsg if the create action fails
+      res.render('sleeps/new', {title: 'New Sleep Log Form', errorMsg: '', profile: profile });
+    }
 
   async function create(req, res) {
     const sleep = new Sleep({
