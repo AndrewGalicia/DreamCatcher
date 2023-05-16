@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const sleepSchema = new mongoose.Schema({
-    dream: {
-        type: String,
-        enum: ['yes', 'no',]
+    dreamed: {
+        type: Boolean,
+        default: true
     },
     sleepQuality: {
         type: String,

@@ -2,7 +2,35 @@
 
 <h2>New Sleep Log Working</h2>
 
-
+<form action="/:id/sleeps" method="POST">
+    <!-- dreamed checkbox -->
+    <label for="dreamed">Did you dream?</label>
+    <input type="checkbox" name="dreamed" id="dreamed">
+  
+    <!-- sleep quality radio buttons -->
+    <div>
+      <span>Sleep quality:</span>
+      <label for="poor">Poor</label>
+      <input type="radio" name="sleepQuality" id="poor" value="poor">
+  
+      <label for="ok">OK</label>
+      <input type="radio" name="sleepQuality" id="ok" value="ok">
+  
+      <label for="good">Good</label>
+      <input type="radio" name="sleepQuality" id="good" value="good">
+    </div>
+  
+    <!-- sleep start time -->
+    <label for="sleepStart">Sleep start:</label>
+    <input type="datetime-local" name="sleepStart" id="sleepStart" required>
+  
+    <!-- sleep end time -->
+    <label for="sleepEnd">Sleep end:</label>
+    <input type="datetime-local" name="sleepEnd" id="sleepEnd" required>
+  
+    <button type="submit">Submit</button>
+  </form>
+  
 
 
 <%- include('../partials/footer') %>
