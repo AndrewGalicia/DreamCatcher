@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const dreamSchema = new Schema({
+    title: { type: String, required: true },
+    summary: { type: String, required: true },
+    tags: { type: [String], required: true }
+  }, { timestamps: true });
+  
+
 const sleepSchema = new mongoose.Schema({
+    dreamLogs: [dreamSchema],
     dreamed: {
         type: Boolean,
         default: true

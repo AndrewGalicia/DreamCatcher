@@ -2,7 +2,6 @@
 
 <h1>Sleep Log Details</h1>
 
-
 <table>
   <thead>
     <tr>
@@ -33,5 +32,38 @@
     </tr>
   </tbody>
 </table>
+
+<!-- Button to create a new dream log -->
+<button>
+<a href="/profiles/<%= user.profile._id %>/sleeps/<%= sleep._id %>/dreams/new">Add Dream Log</a>
+</button>
+<table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Action</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% sleep.dreamLogs.forEach((dream) => { %>
+      <tr>
+        <td><%= dream.title %></td>
+        <td>
+          <form action="/profiles/<%= user.profile._id %>/sleeps/<%= sleep._id %>/dreams/<%= dream._id %>" method="GET">
+            <button type="submit">Show</button>
+          </form>
+        </td>
+        <td>
+            <form action="/profiles/<%=profile._id %>/sleeps/<%= sleep._id %>/dreams/<%= dream._id %>?_method=DELETE" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  
+  
 
 <%- include('../partials/footer') %>

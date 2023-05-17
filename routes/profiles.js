@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const profilesCtrl = require('../controllers/profiles');
 const sleepCtrl = require('../controllers/sleeps');
+const dreamCtrl = require('../controllers/dreams');
+
 
 
 
@@ -29,6 +31,16 @@ router.get('/:id/sleeps/:sleepId', sleepCtrl.show);
 router.get('/:id/sleeps/all', sleepCtrl.showAllSleepLogs);
 // Route to delete the sleep log, currently does not work
 router.delete('/:id/sleeps/:sleepId', sleepCtrl.delete);
+
+// Dream routes
+// Route to display the form for creating a new dream log
+router.get('/:id/sleeps/:sleepId/dreams/new', dreamCtrl.newDream);
+// Route to handle creating a new dream log
+router.post('/:id/sleeps/:sleepId/dreams', dreamCtrl.createDream);
+// Route to display the detailed dream log
+router.get('/:id/sleeps/:sleepId/dreams/:dreamId', dreamCtrl.showDream);
+// Route to delete the dream log
+router.delete('/:id/sleeps/:sleepId/dreams/:dreamId', dreamCtrl.deleteDream)
 
 
 module.exports = router;
