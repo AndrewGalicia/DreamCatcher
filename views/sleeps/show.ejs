@@ -3,6 +3,7 @@
 
 <h1>Sleep Log Details</h1>
 
+
 <table>
   <thead>
     <tr>
@@ -11,7 +12,7 @@
       <th>Sleep Goal</th>
       <th>Sleep Duration</th>
       <th>Quality</th>
-      <th>Exceeded Goal</th>
+      <th>Met Goal</th>
       <th>Dreamed</th>
     </tr>
   </thead>
@@ -26,7 +27,7 @@
         <% if (sleep.sleepDuration.hours > profile.sleepGoal.hours || (sleep.sleepDuration.hours === profile.sleepGoal.hours && sleep.sleepDuration.minutes > profile.sleepGoal.minutes)) { %>
           &#10004;
         <% } else { %>
-          &#10006;
+          failed
         <% } %>
       </td>
       <td><%= sleep.dreamed ? 'Yes' : 'No' %></td>
