@@ -66,32 +66,34 @@ const showDream = async (req, res) => {
 
 // Delete a dream log
 const deleteDream = async (req, res) => {
-  try {
-    const { id, sleepId, dreamId } = req.params;
-
-    // Find the profile and sleep log based on the IDs in the URL
-    const profile = await Profile.findById(id);
-    const sleep = profile.sleepLogs.id(sleepId);
-
-    // Find the specific dream log within the sleep log using findById
-    const dream = await profile.Dream.findById(dreamId);
-
-    // Ensure the dream log exists and belongs to the sleep log
-    if (!dream || !sleep.dreamLogs.includes(dream)) {
-      return res.status(404).render('error', { error: 'Dream log not found' });
-    }
-        // Remove the dream log from the sleep log's dreamLogs array
-        sleep.dreamLogs.pull(dream);
-
-        // Save the updated sleep log
-        await profile.save();
-    
-        res.redirect(`/${profile._id}/sleeps/${sleep._id}`);
-      } catch (error) {
-        console.log(error);
-        res.render('error', { error: 'An error occurred while deleting the dream log' });
+    try {
+      const { id, sleepId, dreamId } = req.params;
+  
+      // Find the profile and sleep log based on the IDs in the URL
+      const profile = await Profile.findById(id);
+      const sleep = profile.sleepLogs.id(sleepId);
+  
+      // Find the specific dream log within the sleep log using findById
+      const dream = await profile.Dream.findById(dreamId);
+  
+      // Ensure the dream log exists and belongs to the sleep log
+      if (!dream || !sleep.dreamLogs.includes(dream)) {
+        return res.status(404).render('error', { error: 'Dream log not found' });
       }
-    };
+  
+      // Remove the dream log from the sleep log's dreamLogs array
+      sleep.dreamLogs.pull(dream);
+  
+      // Save the updated sleep log
+      await profile.save();
+  
+      res.redirect(`/${profile._id}/sleeps/${sleep._id}`);
+    } catch (error) {
+      console.log(error);
+      res.render('error', { error: 'An error occurred while deleting the dream log' });
+    }
+  };
+  
     
     module.exports = {
       newDream,
