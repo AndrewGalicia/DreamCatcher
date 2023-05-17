@@ -3,7 +3,7 @@ const User = require('../models/user');
 
 async function show(req, res) {
   try {
-    console.log('show - req.user:', req.user);
+    // console.log('show - req.user:', req.user);
     const user = await User.findById(req.user._id).populate('profile');
     console.log('show - user:', user);
     res.render('profiles/show', { title: 'Profile new Page', profile: user.profile });

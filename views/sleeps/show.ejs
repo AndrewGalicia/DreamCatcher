@@ -1,3 +1,37 @@
 <%- include('../partials/header') %>
-this is working
+
+
+<h1>Sleep Log Details</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sleep Start</th>
+      <th>Sleep End</th>
+      <th>Sleep Goal</th>
+      <th>Sleep Duration</th>
+      <th>Quality</th>
+      <th>Exceeded Goal</th>
+      <th>Dreamed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= sleep.sleepStart.toLocaleString() %></td>
+      <td><%= sleep.sleepEnd.toLocaleString() %></td>
+      <td><%= profile.sleepGoal.hours %>H:<%= profile.sleepGoal.minutes %>M</td>
+      <td><%= sleep.sleepDuration.hours %>H:<%= sleep.sleepDuration.minutes %>M</td>
+      <td><%= sleep.sleepQuality %></td>
+      <td>
+        <% if (sleep.sleepDuration.hours > profile.sleepGoal.hours || (sleep.sleepDuration.hours === profile.sleepGoal.hours && sleep.sleepDuration.minutes > profile.sleepGoal.minutes)) { %>
+          &#10004;
+        <% } else { %>
+          &#10006;
+        <% } %>
+      </td>
+      <td><%= sleep.dreamed ? 'Yes' : 'No' %></td>
+    </tr>
+  </tbody>
+</table>
+
 <%- include('../partials/footer') %>
