@@ -74,11 +74,13 @@ nav > a.active {
 }
 
 input {
-  background-color: violet;
+  background-color: rgb(237, 208, 237);
 }
 
 button {
-  background-color: violet;
+  background-color: rgb(232, 203, 232);
+  border-radius: 10%;
+  text-decoration: none;
 }
 
 table {
@@ -96,4 +98,9 @@ table td {
   text-align: center;
   border: solid #000000;
   margin: 5px;
+}
+
+#node {
+  display: flex;
+  align-items: center;
 }
