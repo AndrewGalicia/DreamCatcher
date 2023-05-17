@@ -16,6 +16,13 @@ router.post('/', profilesCtrl.createProfile);
 // Route to display the user's profile
 router.get('/:id', profilesCtrl.show);
 
+// Route to display the update form
+router.get('/:id/update', profilesCtrl.showUpdateForm);
+
+// Route to handle updating the profile
+router.post('/:id/update', profilesCtrl.updateProfile);
+
+
 //new sleep log
 router.get('/:id/sleeps/new', sleepCtrl.new);
 

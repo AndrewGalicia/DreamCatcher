@@ -18,9 +18,7 @@ function newProfile(req, res) {
 }
 
 async function createProfile(req, res) {
-  console.log('createProfile - req.user:', req.user);
   const user = await User.findById(req.user._id);
-  console.log('createProfile - user:', user);
   const newProfile = new Profile({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
@@ -35,8 +33,41 @@ async function createProfile(req, res) {
   res.redirect(`/profiles/${newProfile._id}`);
 }
 
+async function showUpdateForm(req, res) {
+  try {
+    const profileId = req.params.id;
+    const profile = await Profile.findById(profileId);
+    res.render('profiles/update', { title: 'Update Profile', profileId, profile, errorMsg: '' });
+  } catch (err) {
+    console.error(err);
+    res.render('error', { error: err });
+  }
+}
+
+
+async function updateProfile(req, res) {
+  try {
+    const profileId = req.params.id;
+    const updatedProfile = await Profile.findByIdAndUpdate(profileId, {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      sleepGoal: {
+        hours: req.body.sleepGoalHours || 0,
+        minutes: req.body.sleepGoalMinutes || 0
+      }
+    }, { new: true });
+
+    res.redirect(`/profiles/${updatedProfile._id}`);
+  } catch (err) {
+    console.error(err);
+    res.render('error', { error: err });
+  }
+}
+
 module.exports = {
   show,
   newProfile,
-  createProfile
+  createProfile,
+  showUpdateForm,
+  updateProfile
 };
