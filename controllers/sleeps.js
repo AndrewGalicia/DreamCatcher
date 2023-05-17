@@ -70,9 +70,15 @@ module.exports = {
 
   async function deleteLog(req, res) {
     try {
+      console.log("------------------",'Deleting sleep log...');
+      console.log('Profile ID:', req.params.id);
+      console.log('Sleep Log ID:', req.params.sleepId);
+  
       const profile = await Profile.findById(req.params.id);
       profile.sleepLogs.pull(req.params.sleepId); // Use pull instead of remove to delete the sleep log
       await profile.save();
+  
+      console.log('Sleep log deleted successfully!');
       res.redirect(`/profiles/${req.params.id}`);
     } catch (err) {
       console.error(err);
