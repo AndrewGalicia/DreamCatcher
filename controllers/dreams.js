@@ -23,21 +23,14 @@ const createDream = async (req, res) => {
   
       // Find the profile and sleep log based on the IDs in the URL
       const profile = await Profile.findById(id);
-      if (!profile) {
-        throw new Error('Profile not found');
-      }
-  
       const sleep = profile.sleepLogs.id(sleepId);
-      if (!sleep) {
-        throw new Error('Sleep log not found');
-      }
   
       // Create a new dream log
-      const dream = new profile.Dream({
+      const dream = {
         title: req.body.title,
         summary: req.body.summary,
-        tags: req.body.tags.split(',').map(tag => tag.trim()),
-      });
+        tags: req.body.tags.split(',').map((tag) => tag.trim()),
+      };
   
       // Add the dream log to the sleep log's dreamLogs array
       sleep.dreamLogs.push(dream);
@@ -49,29 +42,52 @@ const createDream = async (req, res) => {
       const redirectUrl = `/profiles/${id}/sleeps/${sleepId}`;
       res.redirect(redirectUrl);
     } catch (error) {
-      console.error('Error:', error.message);
-      res.status(500).json({ error: error.message });
+      console.log('Error:', error);
+      res.redirect('/'); // Handle error appropriately
     }
   };
   
   
+  
 
 // Display the detailed view of a dream log
-const showDream = async (req, res) => {
-  try {
-    // Find the profile and sleep log based on the IDs in the URL
-    const profile = await Profile.findById(req.params.id);
-    const sleep = profile.sleepLogs.id(req.params.sleepId);
-
-    // Find the specific dream log within the sleep log
-    const dream = sleep.dreamLogs.id(req.params.dreamId);
-
-    res.render('dreams/show', { profile, sleep, dream });
-  } catch (error) {
-    console.log(error);
-    res.redirect('/'); // Handle error appropriately
+// Display the detailed view of a dream log
+// Display the detailed view of a dream log
+async function showDream(req, res) {
+    try {
+      const { id, sleepId, dreamId } = req.params;
+  
+      // Find the profile based on the ID in the URL
+      const profile = await Profile.findById(id);
+  
+      // Find the specific sleep log within the profile
+      const sleep = profile.sleepLogs.id(sleepId);
+  
+      // If sleep log or dream log is not found, throw an error
+      if (!sleep) {
+        throw new Error('Sleep log not found');
+      }
+  
+      // Retrieve additional information from the sleep log
+      const sleepStart = sleep.sleepStart.toISOString(); // Convert to string format
+  
+      // Find the specific dream log within the sleep log
+      const dream = sleep.dreamLogs.id(dreamId);
+  
+      // If dream log is not found, throw an error
+      if (!dream) {
+        throw new Error('Dream log not found');
+      }
+  
+      // Render the show view within the dreams folder with the retrieved data
+      res.render('dreams/show', { sleepStart, dream });
+    } catch (error) {
+      console.log('Error:', error);
+      res.render('error', { message: 'An error occurred', error }); // Render the error page with the error information
+    }
   }
-};
+  
+  
 
 const deleteDream = async (req, res) => {
     try {

@@ -1,5 +1,23 @@
 <%- include('../partials/header') %>
 
-Working
+
+<h1>Dream Details</h1>
+
+<table>
+  <tr>
+    <th>Sleep Start Date</th>
+    <th>Title</th>
+    <th>Tags</th>
+    <th>Summary</th>
+  </tr>
+  <tr>
+    <td><%= dream.sleepLog.sleepStart.toISOString() %></td>
+    <td><%= dream.title %></td>
+    <td><%= dream.tags.join(', ') %></td>
+    <td><%= dream.summary %></td>
+  </tr>
+</table>
+
+
 
 <%- include('../partials/footer') %>
