@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//for dream logs
 const dreamSchema = new Schema({
     title: { type: String, required: true },
     summary: { type: String, required: true },
     tags: { type: [String], required: true }
   }, { timestamps: true });
   
-
+//for sleep logs
 const sleepSchema = new mongoose.Schema({
     dreamLogs: [dreamSchema],
     dreamed: {
@@ -47,7 +48,7 @@ const sleepSchema = new mongoose.Schema({
         message: 'Sleep end time must be after sleep start time'
       }
     }
-  });
+  }); //special function so taht I can have amount of time slept
   sleepSchema.pre('save', function(next) {
     const durationInMinutes = Math.round((this.sleepEnd - this.sleepStart) / (1000 * 60));
     this.sleepDuration = {
@@ -58,7 +59,7 @@ const sleepSchema = new mongoose.Schema({
   },{
     timestamps: true
   });
-
+//main profile page
 const profileSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },

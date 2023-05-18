@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+//used for google authentication. has relationship with profile:
 const userSchema = new Schema({
     name: String,
     googleId: {
@@ -17,6 +17,5 @@ const userSchema = new Schema({
   }, {
     timestamps: true
   });
-  
 
 module.exports = mongoose.model('User', userSchema);

@@ -1,22 +1,19 @@
 const Profile = require('../models/profile');
 const User = require('../models/user');
-
+//Display individual profile
 async function show(req, res) {
   try {
-    // console.log('show - req.user:', req.user);
     const user = await User.findById(req.user._id).populate('profile');
-    console.log('show - user:', user);
     res.render('profiles/show', { title: 'Profile new Page', profile: user.profile });
   } catch (err) {
     console.error(err);
     res.render('error', { error: err });
   }
 }
-
-function newProfile(req, res) {
+//render new profile form if you don't have an account already
+async function newProfile(req, res) {
   res.render('profiles/new', { title: 'New Profile', errorMsg: '', profile: null });
 }
-
 async function createProfile(req, res) {
   const user = await User.findById(req.user._id);
   const newProfile = new Profile({
@@ -32,7 +29,7 @@ async function createProfile(req, res) {
   await user.save();
   res.redirect(`/profiles/${newProfile._id}`);
 }
-
+//update the profile form
 async function showUpdateForm(req, res) {
   try {
     const profileId = req.params.id;
@@ -43,8 +40,7 @@ async function showUpdateForm(req, res) {
     res.render('error', { error: err });
   }
 }
-
-
+//update profile
 async function updateProfile(req, res) {
   try {
     const profileId = req.params.id;
@@ -56,7 +52,6 @@ async function updateProfile(req, res) {
         minutes: req.body.sleepGoalMinutes || 0
       }
     }, { new: true });
-
     res.redirect(`/profiles/${updatedProfile._id}`);
   } catch (err) {
     console.error(err);
