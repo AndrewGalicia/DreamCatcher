@@ -1,8 +1,8 @@
 <%- include('../partials/header') %>
 
-<h1>Create New Dream Log</h1>
+<h1>Create Dream Log</h1>
 
-<form action="/profiles/<%=profile._id %>/sleeps/<%= sleep._id %>/dreams" method="POST">
+<form class="panel" action="/profiles/<%=profile._id %>/sleeps/<%= sleep._id %>/dreams" method="POST">
   <div>
     <label for="title">Title:</label>
     <input type="text" id="title" name="title" required>
@@ -11,12 +11,13 @@
     <label for="summary">Summary:</label>
     <textarea id="summary" name="summary" required></textarea>
   </div>
+  <small>Enter comma-separated tags</small>
   <div>
     <label for="tags">Tags:</label>
     <input type="text" id="tags" name="tags" required>
-    <small>Enter comma-separated tags</small>
   </div>
-  <button type="submit">Create Dream Log</button>
+  
+  <button id="update-botton" type="submit">Log Dream</button>
 </form>
 
 <%- include('../partials/footer') %>

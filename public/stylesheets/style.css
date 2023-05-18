@@ -92,6 +92,10 @@ nav > a.active {
   cursor: default;
 }
 
+textarea {
+  color: black;
+}
+
 .login {
   display: flex;
   justify-content: center;
