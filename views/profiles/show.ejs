@@ -9,7 +9,7 @@
     <button id="update-botton">
       <a href="/profiles/<%= user.profile._id %>/update" class="btn btn-primary">Update Profile</a>
     </button>
-  </div class="panel">
+  </div>
   <div class="panel">
     <h2>Streak:</h2>
     <p id="streak-num">
@@ -30,10 +30,6 @@
   <button id="sleep-log">
     <a href="/profiles/<%= user.profile._id %>/sleeps/new" class="btn btn-primary">New Sleep Log</a>  
   </button>
-
-
-<!-- Existing code... -->
-
 <table>
   <thead>
     <tr>
@@ -55,8 +51,10 @@
         <td><%= sleepLog.sleepQuality %></td>
         <td><%= sleepLog.dreamed ? 'Yes' : 'No' %></td>
         <td>
-          <% if (sleepLog.sleepDuration.hours > profile.sleepGoal.hours || (sleepLog.sleepDuration.hours === profile.sleepGoal.hours && sleepLog.sleepDuration.minutes > profile.sleepGoal.minutes)) { %>
-            &#10004; <!-- Insert a checkmark -->
+          <% if (sleepLog.sleepDuration.hours * 60 + sleepLog.sleepDuration.minutes >= profile.sleepGoal.hours * 60 + profile.sleepGoal.minutes) { %>
+            <span class="goal-achieved-mark">&#10004;</span> <!-- Insert a mark, e.g., checkmark -->
+          <% } else { %>
+            <span class="goal-not-achieved-mark">X</span> <!-- Insert a mark, e.g., X -->
           <% } %>
         </td>
         <td>
@@ -73,9 +71,6 @@
     <% }) %>
   </tbody>
 </table>
-
-<!-- Existing code... -->
-
 
 </div>
 

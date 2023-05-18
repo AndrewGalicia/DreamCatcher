@@ -2,42 +2,36 @@
 
 <h1>Sleep Log Details</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Sleep Start</th>
-      <th>Sleep End</th>
-      <th>Sleep Goal</th>
-      <th>Sleep Duration</th>
-      <th>Quality</th>
-      <th>Met Goal</th>
-      <th>Dreamed</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= sleep.sleepStart.toLocaleString() %></td>
-      <td><%= sleep.sleepEnd.toLocaleString() %></td>
-      <td><%= profile.sleepGoal.hours %>H:<%= profile.sleepGoal.minutes %>M</td>
-      <td><%= sleep.sleepDuration.hours %>H:<%= sleep.sleepDuration.minutes %>M</td>
-      <td><%= sleep.sleepQuality %></td>
-      <td>
-        <% if (sleep.sleepDuration.hours > profile.sleepGoal.hours || (sleep.sleepDuration.hours === profile.sleepGoal.hours && sleep.sleepDuration.minutes > profile.sleepGoal.minutes)) { %>
-          &#10004;
+<div class="panel">
+  <% if (profile.sleepLogs.length > 0) { %>
+    <% const sleepLog = profile.sleepLogs[0]; %>
+    <div class="sleep-log">
+      <h3>Sleep Date: <%= new Date(sleepLog.sleepStart).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' }) %></h3>
+      <p><strong>Sleep Hours:</strong> <%= sleepLog.sleepDuration.hours %>H:<%= sleepLog.sleepDuration.minutes %>M</p>
+      <p><strong>Sleep Quality:</strong> <%= sleepLog.sleepQuality %></p>
+      <p><strong>Dreamed:</strong> <%= sleepLog.dreamed ? 'Yes' : 'No' %></p>
+      <p><strong>Goal Achieved?</strong> 
+        <% if (sleepLog.sleepDuration.hours >= profile.sleepGoal.hours && sleepLog.sleepDuration.minutes >= profile.sleepGoal.minutes) { %>
+          &#10004; <!-- Insert a checkmark -->
         <% } else { %>
-          failed
+          X
         <% } %>
-      </td>
-      <td><%= sleep.dreamed ? 'Yes' : 'No' %></td>
-    </tr>
-  </tbody>
-</table>
+      </p>
+      <p><strong>Sleep Goal:</strong> <%= profile.sleepGoal.hours %>H:<%= profile.sleepGoal.minutes %>M</p>
+    </div>
+  <% } else { %>
+    <p>No sleep logs available.</p>
+  <% } %>
+</div>
+
 
 <!-- Button to create a new dream log -->
+<h2>Dreams</h2>
+<div class="panel">
 <button>
 <a href="/profiles/<%= user.profile._id %>/sleeps/<%= sleep._id %>/dreams/new">Add Dream Log</a>
 </button>
-<table>
+<table >
     <thead>
       <tr>
         <th>Title</th>
@@ -63,6 +57,7 @@
       <% }) %>
     </tbody>
   </table>
+</div>
   
   
 
