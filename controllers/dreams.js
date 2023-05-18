@@ -53,6 +53,7 @@ const createDream = async (req, res) => {
 // Display the detailed view of a dream log
 // Display the detailed view of a dream log
 // Display the detailed view of a dream log
+// Display the detailed view of a dream log
 async function showDream(req, res) {
     try {
       const { id, sleepId, dreamId } = req.params;
@@ -86,6 +87,7 @@ async function showDream(req, res) {
       res.render('error', { message: 'An error occurred', error }); // Render the error page with the error information
     }
   }
+  
   
   
 
