@@ -1,10 +1,8 @@
 <%- include('../partials/header') %>
 
-<h2>Update Profile Page</h2>
-
 <body>
 	<h1>Update Profile</h1>
-	<form action="/profiles/<%= profileId %>/update" method="POST">
+	<form class="panel" action="/profiles/<%= profileId %>/update" method="POST">
 		<label for="firstName">First Name:</label>
 		<input type="text" id="firstName" name="firstName" value="<%= profile.firstName %>" required>
 
@@ -17,7 +15,7 @@
 		<label for="sleepGoalMinutes">Sleep Goal Minutes:</label>
 		<input type="number" id="sleepGoalMinutes" name="sleepGoalMinutes" value="<%= profile.sleepGoal.minutes %>" min="0" max="59" required>
 
-		<button type="submit">Update Profile</button>
+		<button id="update-botton" type="submit">Update Profile</button>
 	</form>
 	<% if (errorMsg) { %>
 		<p><%= errorMsg %></p>

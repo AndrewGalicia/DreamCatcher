@@ -4,15 +4,25 @@
 <div id="front-dash">
   <div class="panel">
     <h2>Profile Detail:</h2>
-    <p>Name: <%=profile.firstName%> <%=profile.lastName%> </p>
-    <p>Sleep Goal: <%=profile.sleepGoal.hours%> H <%=profile.sleepGoal.minutes%> M </p>
+    <p>Name: <%= profile.firstName %> <%= profile.lastName %> </p>
+    <p>Sleep Goal: <%= profile.sleepGoal.hours %> H <%= profile.sleepGoal.minutes %> M </p>
     <button id="update-botton">
       <a href="/profiles/<%= user.profile._id %>/update" class="btn btn-primary">Update Profile</a>
     </button>
   </div class="panel">
   <div class="panel">
     <h2>Streak:</h2>
-    <p></p>
+    <p id="streak-num">
+      <% let streakCount = 0; %>
+      <% profile.sleepLogs.forEach((sleepLog) => { %>
+        <% if (sleepLog.sleepDuration.hours > profile.sleepGoal.hours || (sleepLog.sleepDuration.hours === profile.sleepGoal.hours && sleepLog.sleepDuration.minutes > profile.sleepGoal.minutes)) { %>
+          <% streakCount++; %>
+        <% } else { %>
+          <% streakCount = 0; %>
+        <% } %>
+      <% }) %>
+      <%= streakCount %>
+    </p>
   </div>
  
 </div>
@@ -27,15 +37,15 @@
         <th>Sleep Hours</th>
         <th>Sleep Quality</th>
         <th>Dreamed</th>
-        <th>Goal Achieved?</th> <!-- Add a new column for the checkmark -->
+        <th>Goal Achieved?</th>
         <th>Details</th>
-        <th>Delete</th> <!-- Add a new column for the delete button -->
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
       <% profile.sleepLogs.forEach((sleepLog) => { %>
         <tr>
-          <td><%= sleepLog.sleepDuration.hours %>H:<%=sleepLog.sleepDuration.minutes %>M </td>
+          <td><%= sleepLog.sleepDuration.hours %>H:<%= sleepLog.sleepDuration.minutes %>M</td>
           <td><%= sleepLog.sleepQuality %></td>
           <td><%= sleepLog.dreamed ? 'Yes' : 'No' %></td>
           <td>
@@ -49,7 +59,7 @@
             </form>
           </td>
           <td>
-            <form action="/profiles/<%=profile._id %>/sleeps/<%= sleepLog._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this sleep log?');">
+            <form action="/profiles/<%= profile._id %>/sleeps/<%= sleepLog._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this sleep log?');">
               <button type="submit">Delete</button>
             </form>
           </td>  

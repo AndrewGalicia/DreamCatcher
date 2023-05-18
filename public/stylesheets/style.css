@@ -57,6 +57,11 @@ body > main h1:first-child {
   margin-bottom: 50px;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+}
+
 nav > a {
   margin: 20px;
   text-decoration: none;
@@ -138,6 +143,14 @@ table td {
   align-items: center;
 }
 
+#front-dash {
+  display: flex;
+  justify-content: space-evenly;
+  
+
+
+}
+
 #sleep-log {
   height: 40px;
   width: 130px; 
@@ -160,4 +173,7 @@ table td {
   margin-top: 5px;
 }
 
+#streak-num {
+  font-size: 50px;
+}
 
