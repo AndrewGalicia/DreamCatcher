@@ -15,6 +15,19 @@ h2 {
   font-style: bold;
 }
 
+label {
+  padding-top: 3px;
+  padding-bottom: 10px;
+}
+
+input {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  margin-bottom: 10px;
+  color: black
+
+}
+
 body {
   margin: 0;
   
@@ -141,6 +154,8 @@ table td {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: 3px;
+  margin-right: 3px;
 }
 
 #front-dash {
@@ -176,4 +191,18 @@ table td {
 #streak-num {
   font-size: 50px;
 }
+#front-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
+#titlecard {
+  
+  font-size: 100px;
+  padding-top: 50px;
+  
+  margin-bottom: -10px;
+  margin-top: 100px;
+}

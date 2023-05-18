@@ -24,7 +24,6 @@
       <%= streakCount %>
     </p>
   </div>
- 
 </div>
 
 <div class="panel">
@@ -34,6 +33,7 @@
   <table>
     <thead>
       <tr>
+        <th>Date</th>
         <th>Sleep Hours</th>
         <th>Sleep Quality</th>
         <th>Dreamed</th>
@@ -43,8 +43,10 @@
       </tr>
     </thead>
     <tbody>
-      <% profile.sleepLogs.forEach((sleepLog) => { %>
+      <% const sortedSleepLogs = profile.sleepLogs.sort((a, b) => new Date(a.sleepStart) - new Date(b.sleepStart)) %>
+      <% sortedSleepLogs.forEach((sleepLog) => { %>
         <tr>
+          <td><%= sleepLog.sleepStart %></td>
           <td><%= sleepLog.sleepDuration.hours %>H:<%= sleepLog.sleepDuration.minutes %>M</td>
           <td><%= sleepLog.sleepQuality %></td>
           <td><%= sleepLog.dreamed ? 'Yes' : 'No' %></td>

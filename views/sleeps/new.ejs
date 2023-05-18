@@ -1,8 +1,8 @@
 <%- include('../partials/header') %>
 
-<h2>New Sleep Log Working</h2>
+<h2>New Sleep Log</h2>
 
-<form action="/profiles/<%= user.profile._id  %>/sleeps" method="POST">
+<form class="panel" action="/profiles/<%= user.profile._id  %>/sleeps" method="POST">
     
     <div>
       <span>Sleep quality:</span>
@@ -15,6 +15,16 @@
       <label for="good">Good</label>
       <input type="radio" name="sleepQuality" id="good" value="good">
     </div>
+    
+    <!-- Dreamed -->
+    <div>
+      <span>Dreamed:</span>
+      <label for="dreamed-yes">Yes</label>
+      <input type="radio" name="dreamed" id="dreamed-yes" value="true">
+  
+      <label for="dreamed-no">No</label>
+      <input type="radio" name="dreamed" id="dreamed-no" value="false">
+    </div>
   
     <!-- sleep start time -->
     <label for="sleepStart">Sleep start:</label>
@@ -25,8 +35,6 @@
     <input type="datetime-local" name="sleepEnd" id="sleepEnd" required>
   
     <button type="submit">Submit</button>
-  </form>
-  
-
+</form>
 
 <%- include('../partials/footer') %>
