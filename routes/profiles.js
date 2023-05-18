@@ -4,11 +4,7 @@ const profilesCtrl = require('../controllers/profiles');
 const sleepCtrl = require('../controllers/sleeps');
 const dreamCtrl = require('../controllers/dreams');
 
-
-
-
-
-//profile routes
+//Profile routes
 // Route to display the form for creating a new profile
 router.get('/new', profilesCtrl.newProfile);
 // Route to handle creating a new profile
@@ -20,7 +16,7 @@ router.get('/:id/update', profilesCtrl.showUpdateForm);
 // Route to handle updating the profile
 router.post('/:id/update', profilesCtrl.updateProfile);
 
-//sleep routes
+//Sleep routes
 //new sleep log
 router.get('/:id/sleeps/new', sleepCtrl.new);
 // Route to handle creating a new sleep log

@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const profilesCtrl = require('../controllers/profiles');
 const User = require('../models/user');
 
 
@@ -52,7 +51,6 @@ function isAuthenticated(req, res, next) {
   }
   res.redirect('/login');
 }
-
 // OAuth logout route
 router.get('/logout', function(req, res){
   req.logout(function() {
