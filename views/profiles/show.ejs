@@ -30,45 +30,53 @@
   <button id="sleep-log">
     <a href="/profiles/<%= user.profile._id %>/sleeps/new" class="btn btn-primary">New Sleep Log</a>  
   </button>
-  <table>
-    <thead>
+
+
+<!-- Existing code... -->
+
+<table>
+  <thead>
+    <tr>
+      <th>Sleep Date</th>
+      <th>Sleep Hours</th>
+      <th>Sleep Quality</th>
+      <th>Dreamed</th>
+      <th>Goal Achieved?</th>
+      <th>Details</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% const sortedSleepLogs = profile.sleepLogs.sort((a, b) => new Date(a.sleepStart) - new Date(b.sleepStart)).reverse() %>
+    <% sortedSleepLogs.forEach((sleepLog) => { %>
       <tr>
-        <th>Date</th>
-        <th>Sleep Hours</th>
-        <th>Sleep Quality</th>
-        <th>Dreamed</th>
-        <th>Goal Achieved?</th>
-        <th>Details</th>
-        <th>Delete</th>
+        <td><%= new Date(sleepLog.sleepStart).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' }) %></td>
+        <td><%= sleepLog.sleepDuration.hours %>H:<%= sleepLog.sleepDuration.minutes %>M</td>
+        <td><%= sleepLog.sleepQuality %></td>
+        <td><%= sleepLog.dreamed ? 'Yes' : 'No' %></td>
+        <td>
+          <% if (sleepLog.sleepDuration.hours > profile.sleepGoal.hours || (sleepLog.sleepDuration.hours === profile.sleepGoal.hours && sleepLog.sleepDuration.minutes > profile.sleepGoal.minutes)) { %>
+            &#10004; <!-- Insert a checkmark -->
+          <% } %>
+        </td>
+        <td>
+          <form action="/profiles/<%= user.profile._id %>/sleeps/<%= sleepLog._id %>" method="GET">
+            <button type="submit">View Details</button>
+          </form>
+        </td>
+        <td>
+          <form action="/profiles/<%= profile._id %>/sleeps/<%= sleepLog._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this sleep log?');">
+            <button type="submit">Delete</button>
+          </form>
+        </td>  
       </tr>
-    </thead>
-    <tbody>
-      <% const sortedSleepLogs = profile.sleepLogs.sort((a, b) => new Date(a.sleepStart) - new Date(b.sleepStart)) %>
-      <% sortedSleepLogs.forEach((sleepLog) => { %>
-        <tr>
-          <td><%= sleepLog.sleepStart %></td>
-          <td><%= sleepLog.sleepDuration.hours %>H:<%= sleepLog.sleepDuration.minutes %>M</td>
-          <td><%= sleepLog.sleepQuality %></td>
-          <td><%= sleepLog.dreamed ? 'Yes' : 'No' %></td>
-          <td>
-            <% if (sleepLog.sleepDuration.hours > profile.sleepGoal.hours || (sleepLog.sleepDuration.hours === profile.sleepGoal.hours && sleepLog.sleepDuration.minutes > profile.sleepGoal.minutes)) { %>
-              &#10004; <!-- Insert a checkmark -->
-            <% } %>
-          </td>
-          <td>
-            <form action="/profiles/<%= user.profile._id %>/sleeps/<%= sleepLog._id %>" method="GET">
-              <button type="submit">View Details</button>
-            </form>
-          </td>
-          <td>
-            <form action="/profiles/<%= profile._id %>/sleeps/<%= sleepLog._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure you want to delete this sleep log?');">
-              <button type="submit">Delete</button>
-            </form>
-          </td>  
-        </tr>
-      <% }) %>
-    </tbody>
-  </table>
+    <% }) %>
+  </tbody>
+</table>
+
+<!-- Existing code... -->
+
+
 </div>
 
 <%- include('../partials/footer') %>
