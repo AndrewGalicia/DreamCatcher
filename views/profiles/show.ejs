@@ -1,10 +1,20 @@
 <%- include('../partials/header') %>
 
 <h1><%= profile.firstName %>'s Sleep Logs</h1>
-<div id="node">
+<div id="front-dash">
+  <div class="panel">
+    <h2>Profile Detail:</h2>
+    <p>Name: <%=profile.firstName%> <%=profile.lastName%> </p>
+    <p>Sleep Goal: <%=profile.sleepGoal.hours%> H <%=profile.sleepGoal.minutes%> M </p>
     <button id="update-botton">
-        <a href="/profiles/<%= user.profile._id %>/update" class="btn btn-primary">Update Profile</a>
+      <a href="/profiles/<%= user.profile._id %>/update" class="btn btn-primary">Update Profile</a>
     </button>
+  </div class="panel">
+  <div class="panel">
+    <h2>Streak:</h2>
+    <p></p>
+  </div>
+ 
 </div>
 
 <div class="panel">
