@@ -1,10 +1,14 @@
 * {
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:  Helvetica, sans-serif;
   font-weight: 100;
-  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.684);
   color: white;
   
+}
+
+h1 {
+  font-size: 50px;
 }
 
 body {
@@ -36,11 +40,9 @@ nav > img {
 
 body > main {
   background: linear-gradient(to top, #36abcb,  #10113c);
-  grid-area: main;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ebe7ed;
   padding: 20px;
   overflow-y: scroll;
 }
@@ -79,14 +81,27 @@ nav > a.active {
   height: 30px;
 }
 
-input {
-  background-color: rgb(237, 208, 237);
-}
 
 button {
-  background-color: rgb(232, 203, 232);
-  border-radius: 10%;
+  background-color: #222A40;
+  border-radius: 3%;
+  
+  border: 1px solid #ffffff;
+  height: 30px;
+  width: 120px;  
+  font-weight: bold;
+}
+
+button a {
+  font-family: helvetica;
+  font-weight: bold;
   text-decoration: none;
+}
+
+button:hover {
+  box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.752); 
+  width: 120px; /* Increase the width on hover to maintain the 5-pixel extension */
+  background-color: rgb(123, 192, 251);
 }
 
 table {
@@ -107,7 +122,38 @@ table td {
   
 }
 
-#node {
+.panel {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #222A40;
+  border: solid #ffffff;
+  border-radius: 5px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
+
+#sleep-log {
+  height: 40px;
+  width: 130px; 
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+#update-botton {
+  height: 40px;
+  width: 130px; 
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+
