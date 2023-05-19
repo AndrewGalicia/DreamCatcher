@@ -28,7 +28,7 @@ const createDream = async (req, res) => {
     res.redirect(redirectUrl);
   } catch (error) {
     console.log('Error:', error);
-    res.redirect('/'); // Handle error appropriately
+    res.render('error', { message: 'An error occurred', error });
   }
 };
 
