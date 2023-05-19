@@ -4,12 +4,12 @@
   font-weight: 100;
   text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.684);
   color: white;
-  
 }
 
 h1 {
   font-size: 50px;
 }
+
 h2 {
   font-size: 40px;
   font-style: bold;
@@ -25,12 +25,19 @@ input {
   padding-bottom: 3px;
   margin-bottom: 10px;
   color: black
+}
 
+textarea {
+  color: black;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 body {
   margin: 0;
-  
   height: 100vh;
   display: grid;
   grid-template-rows: 50px 1fr;
@@ -48,13 +55,6 @@ body > nav {
   background-color: #10113c;
 }
 
-nav > img {
-  width: 34px;
-  object-fit: contain;
-  margin-right: auto;
-}
-
-
 body > main {
   background: linear-gradient(to top, #36abcb,  #10113c);
   display: flex;
@@ -64,15 +64,14 @@ body > main {
   overflow-y: scroll;
 }
 
-
-
 body > main h1:first-child {
   margin-bottom: 50px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
+nav > img {
+  width: 34px;
+  object-fit: contain;
+  margin-right: auto;
 }
 
 nav > a {
@@ -92,26 +91,9 @@ nav > a.active {
   cursor: default;
 }
 
-textarea {
-  color: black;
-}
-
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 34px;
-}
-
-.login img {
-  height: 30px;
-}
-
-
 button {
   background-color: #222A40;
   border-radius: 3%;
-  
   border: 1px solid #ffffff;
   height: 30px;
   width: 120px;  
@@ -126,26 +108,31 @@ button a {
 
 button:hover {
   box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.752); 
-  width: 120px; /* Increase the width on hover to maintain the 5-pixel extension */
+  width: 120px;
   background-color: rgb(123, 192, 251);
 }
 
 table {
   font-size: 25px;
-  background-color: ;
 }
 
 table thead th {
   padding: 5px;
   border-bottom: 1px solid #ffffff;
-  
 }
 
 table td {
-  
   text-align: center;
-  
-  
+}
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 34px;
+}
+
+.login img {
+  height: 30px;
 }
 
 .panel {
@@ -165,9 +152,6 @@ table td {
 #front-dash {
   display: flex;
   justify-content: space-evenly;
-  
-
-
 }
 
 #sleep-log {
@@ -195,6 +179,7 @@ table td {
 #streak-num {
   font-size: 50px;
 }
+
 #front-page {
   display: flex;
   flex-direction: column;

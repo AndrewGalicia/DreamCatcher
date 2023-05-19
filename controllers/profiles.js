@@ -14,6 +14,7 @@ async function show(req, res) {
 async function newProfile(req, res) {
   res.render('profiles/new', { title: 'New Profile', errorMsg: '', profile: null });
 }
+
 async function createProfile(req, res) {
   const user = await User.findById(req.user._id);
   const newProfile = new Profile({

@@ -52,7 +52,6 @@ const showDream = async (req, res) => {
     res.render('error', { message: 'An error occurred', error });
   }
 };
-
 // Delete a dream log
 const deleteDream = async (req, res) => {
   try {
